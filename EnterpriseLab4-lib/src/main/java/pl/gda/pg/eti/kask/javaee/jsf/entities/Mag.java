@@ -37,7 +37,10 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "magowie")
-@NamedQuery(name = "Mag.findAll", query = "SELECT m FROM Mag m")
+@NamedQueries({
+    @NamedQuery(name = "Mag.findAll", query = "SELECT m FROM Mag m"),
+    @NamedQuery(name = "Mag.increaseManaForAll", query = "UPDATE Mag m SET m.mana = m.mana + :incr")
+})
 public class Mag {
 
   @XmlAttribute(name = "imie", required = true)

@@ -70,6 +70,9 @@
     </h:form>
     <h:button value="#{msg.newTower}" outcome="edit_wieza.xhtml"/>
     <h:button value="#{msg.newMag}" outcome="edit_mag.xhtml"/>
+    <h:form>
+      <h:commandButton value="Trenuj magów (zwiększa manę o 15)" action="#{listWieze.trenujMagow(15)}"/>
+    </h:form>
   </ui:define>
 </ui:composition>
 </body>

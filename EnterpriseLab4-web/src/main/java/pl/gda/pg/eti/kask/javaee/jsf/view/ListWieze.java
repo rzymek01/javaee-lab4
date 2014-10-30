@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.List;
+import javax.ejb.EJB;
 
 /**
  * @author psysiu
@@ -23,14 +24,12 @@ import java.util.List;
 @ManagedBean
 public class ListWieze implements Serializable {
 
-  @ManagedProperty("#{wiezaService}")
+  @EJB
   private WiezaService wiezaService;
 
-  public void setWiezaService(WiezaService wiezaService) {
-    this.wiezaService = wiezaService;
-
-    this.getWieze();
-    this.getMagowie();
+  public ListWieze() {
+    
+    
   }
 
   private List<Wieza> wieze;
@@ -42,10 +41,16 @@ public class ListWieze implements Serializable {
     }
     return wieze;
   }
+  
+  public void trenujMagow(int incr) {
+    wiezaService.trenujMagow(incr);
+    magowie = wiezaService.findAllMagowie();
+    wieze = wiezaService.findAllWieze();
+  }
 
   public void removeWieza(Wieza wieza) {
     wiezaService.removeWieza(wieza);
-    wieze.remove(wieza);
+    wieze = wiezaService.findAllWieze();
   }
 
   public List<Mag> getMagowie() {
@@ -57,7 +62,8 @@ public class ListWieze implements Serializable {
 
   public void removeMag(Mag mag) {
     wiezaService.removeMag(mag);
-    magowie.remove(mag);
+    magowie = wiezaService.findAllMagowie();
+    wieze = wiezaService.findAllWieze();
   }
 
   public void downloadSwiatXML() throws IOException {

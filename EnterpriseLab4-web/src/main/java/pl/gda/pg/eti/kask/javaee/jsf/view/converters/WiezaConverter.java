@@ -1,5 +1,6 @@
 package pl.gda.pg.eti.kask.javaee.jsf.view.converters;
 
+import javax.ejb.EJB;
 import pl.gda.pg.eti.kask.javaee.jsf.WiezaService;
 import pl.gda.pg.eti.kask.javaee.jsf.entities.Mag;
 import pl.gda.pg.eti.kask.javaee.jsf.entities.Wieza;
@@ -20,7 +21,7 @@ import javax.faces.convert.Converter;
 @RequestScoped
 public class WiezaConverter implements Converter {
 
-    @ManagedProperty("#{wiezaService}")
+    @EJB
     private WiezaService wiezaService;
 
     public void setWiezaService(WiezaService wiezaService) {

@@ -18,6 +18,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import javax.ejb.EJB;
 
 /**
  * @author psysiu
@@ -28,7 +29,7 @@ import java.util.logging.Level;
 @Log
 public class EditMag implements Serializable {
 
-  @ManagedProperty("#{wiezaService}")
+  @EJB
   private WiezaService wiezaService;
 
   @Getter

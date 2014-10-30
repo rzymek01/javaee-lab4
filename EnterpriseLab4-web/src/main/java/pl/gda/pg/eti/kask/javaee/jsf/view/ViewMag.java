@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Level;
+import javax.ejb.EJB;
 
 /**
  * @author psysiu
@@ -23,7 +24,7 @@ import java.util.logging.Level;
 @Log
 public class ViewMag implements Serializable {
 
-  @ManagedProperty("#{wiezaService}")
+  @EJB
   private WiezaService wiezaService;
 
   @Getter

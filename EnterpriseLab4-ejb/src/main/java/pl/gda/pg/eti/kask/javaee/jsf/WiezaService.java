@@ -20,27 +20,29 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.*;
 import java.util.logging.Level;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 
 /**
  * @author psysiu
  * @author maciek
  */
-@ManagedBean
-@ViewScoped
+@Stateless
+@LocalBean
 @Log
 public class WiezaService implements Serializable {
 
   @PersistenceContext
   EntityManager em;
-
-  @Resource
-  UserTransaction userTransaction;
+//
+//  @Resource
+//  UserTransaction userTransaction;
 
 //  private SortedMap<Integer, Wieza> wieze;
 //
 //  private SortedMap<Integer, Mag> magowie;
 
-//  public WiezaService() {
+  public WiezaService() {
 //    wieze = new TreeMap<>();
 //    magowie = new TreeMap<>();
 //    try {
@@ -59,7 +61,7 @@ public class WiezaService implements Serializable {
 //    } catch (JAXBException ex) {
 //      log.log(Level.WARNING, ex.getMessage(), ex);
 //    }
-//  }
+  }
 
   private List<Mag> asList(Mag... magowie) {
     return findAllMagowie();
@@ -74,43 +76,48 @@ public class WiezaService implements Serializable {
   }
 
   public void removeWieza(Wieza wieza) {
-    try {
-      userTransaction.begin();
+//    try {
+//      userTransaction.begin();
 
       wieza = em.merge(wieza);
       em.remove(wieza);
 
-      userTransaction.commit();
-    } catch (Exception e) {
-      e.printStackTrace();
-
-      try {
-        userTransaction.rollback();
-      } catch (SystemException e1) {
-        e1.printStackTrace();
-      }
-    }
+//      userTransaction.commit();
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//
+//      try {
+//        userTransaction.rollback();
+//      } catch (SystemException e1) {
+//        e1.printStackTrace();
+//      }
+//    }
 
   }
 
   public void saveWieza(Wieza wieza) {
-    try {
-      userTransaction.begin();
+//    try {
+//      userTransaction.begin();
       if (wieza.getId() > 0) {
         em.merge(wieza);
       } else {
         em.persist(wieza);
       }
-      userTransaction.commit();
-    } catch (Exception e) {
-      e.printStackTrace();
-
-      try {
-        userTransaction.rollback();
-      } catch (SystemException e1) {
-        e1.printStackTrace();
-      }
-    }
+//      userTransaction.commit();
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//
+//      try {
+//        userTransaction.rollback();
+//      } catch (SystemException e1) {
+//        e1.printStackTrace();
+//      }
+//    }
+  }
+  
+  public void trenujMagow(int incr) {
+    em.createNamedQuery("Mag.increaseManaForAll").setParameter("incr", incr).
+        executeUpdate();
   }
 
   public List<Mag> findAllMagowie() {
@@ -122,42 +129,42 @@ public class WiezaService implements Serializable {
   }
 
   public void removeMag(Mag mag) {
-    try {
-      userTransaction.begin();
+//    try {
+//      userTransaction.begin();
 
       mag = em.merge(mag);
       em.remove(mag);
-
-      userTransaction.commit();
-    } catch (Exception e) {
-      e.printStackTrace();
-
-      try {
-        userTransaction.rollback();
-      } catch (SystemException e1) {
-        e1.printStackTrace();
-      }
-    }
+//
+//      userTransaction.commit();
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//
+//      try {
+//        userTransaction.rollback();
+//      } catch (SystemException e1) {
+//        e1.printStackTrace();
+//      }
+//    }
   }
 
   public void saveMag(Mag mag) {
-    try {
-      userTransaction.begin();
+//    try {
+//      userTransaction.begin();
       if (mag.getId() > 0) {
         em.merge(mag);
       } else {
         em.persist(mag);
       }
-      userTransaction.commit();
-    } catch (Exception e) {
-      e.printStackTrace();
-
-      try {
-        userTransaction.rollback();
-      } catch (SystemException e1) {
-        e1.printStackTrace();
-      }
-    }
+//      userTransaction.commit();
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//
+//      try {
+//        userTransaction.rollback();
+//      } catch (SystemException e1) {
+//        e1.printStackTrace();
+//      }
+//    }
   }
 
   public void marshalSwiat(OutputStream out) {
